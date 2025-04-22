@@ -34,3 +34,4 @@
 - Vite - Compiling and Bundling
 - Tailwind CSS - for styling
 - [React Router](https://reactrouter.com/start/declarative/installation) - for navigating between pages
+- Lucide react icons - [Link](https://lucide.dev/guide/packages/lucide-react)
