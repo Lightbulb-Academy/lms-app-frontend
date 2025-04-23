@@ -35,3 +35,11 @@
 - Tailwind CSS - for styling
 - [React Router](https://reactrouter.com/start/declarative/installation) - for navigating between pages
 - Lucide react icons - [Link](https://lucide.dev/guide/packages/lucide-react)
+- Axios - [Link](https://axios-http.com/docs/intro)
+
+## API Methods
+
+- GET
+- POST - body
+- PATCH/PUT - body
+- DELETE
