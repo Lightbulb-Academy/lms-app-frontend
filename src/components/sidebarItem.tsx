@@ -12,7 +12,9 @@ export default function SidebarItem({ to, label }: SidebarItemProps) {
         to={to}
         className={({ isActive }) =>
           `w-full flex px-4 py-2 rounded-md ${
-            isActive ? "bg-black text-white" : ""
+            isActive
+              ? "bg-black text-white hover:opacity-80"
+              : "hover:bg-amber-100"
           }`
         }
       >
