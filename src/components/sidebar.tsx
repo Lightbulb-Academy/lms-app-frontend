@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import SidebarItem from "./sidebarItem";
 
 export default function Sidebar() {
   return (
@@ -11,36 +11,9 @@ export default function Sidebar() {
       {/* Menu Items */}
       <div className="w-full">
         <ul className="flex flex-col gap-1 w-full">
-          <li className="w-full">
-            <NavLink
-              to="/books"
-              className={({ isActive }) =>
-                `w-full flex px-4 py-2 ${isActive ? "bg-black text-white" : ""}`
-              }
-            >
-              Books
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/members"
-              className={({ isActive }) =>
-                `w-full flex px-4 py-2 ${isActive ? "bg-black text-white" : ""}`
-              }
-            >
-              Members
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/transactions"
-              className={({ isActive }) =>
-                `w-full flex px-4 py-2 ${isActive ? "bg-black text-white" : ""}`
-              }
-            >
-              Transactions
-            </NavLink>
-          </li>
+          <SidebarItem to="/books" label="Books" />
+          <SidebarItem to="/members" label="Members" />
+          <SidebarItem to="/transactions" label="Transactions" />
         </ul>
       </div>
     </aside>
