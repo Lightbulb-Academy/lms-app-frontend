@@ -36,6 +36,7 @@
 - [React Router](https://reactrouter.com/start/declarative/installation) - for navigating between pages
 - Lucide react icons - [Link](https://lucide.dev/guide/packages/lucide-react)
 - Axios - [Link](https://axios-http.com/docs/intro)
+- jwt-decode - [Link](https://www.npmjs.com/package/jwt-decode)
 
 ## API Methods
 
