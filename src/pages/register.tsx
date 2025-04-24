@@ -47,7 +47,7 @@ const Register = () => {
             id="password"
             content="Password"
           />
-          <Button content="Register" type="submit" bgColor="bg-blue-600" />
+          <Button content="Register" type="submit" className="bg-blue-600" />
         </form>
       </div>
     </div>

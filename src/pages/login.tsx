@@ -46,7 +46,7 @@ const Login = () => {
             id="password"
             content="Password"
           />
-          <Button content="Login" type="submit" bgColor="bg-blue-600" />
+          <Button content="Login" type="submit" className="bg-blue-600" />
         </form>
       </div>
     </div>
