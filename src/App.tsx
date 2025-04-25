@@ -3,6 +3,7 @@ import Register from "./pages/register";
 import AppLayout from "./layout/appLayout";
 import Login from "./pages/login";
 import { jwtDecode } from "jwt-decode";
+import Books from "./pages/books";
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
@@ -26,11 +27,10 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<ProtectedRoutes />}>
         {/* These routes is rendered by Outlet in AppLayout */}
-        <Route path="/books" element={<p>Books</p>} />
+        <Route path="/books" element={<Books />} />
         <Route path="/members" element={<p>Members</p>} />
         <Route path="/transactions" element={<p>Transactions</p>} />
       </Route>
-      {/* TODO: add route for login page */}
     </Routes>
   );
 }
