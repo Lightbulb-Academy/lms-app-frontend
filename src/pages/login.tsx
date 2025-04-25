@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import Button from "../components/button";
 import Input from "../components/input";
 import axios from "axios";
@@ -7,8 +7,10 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setError(null);
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData.entries());
@@ -34,6 +36,7 @@ const Login = () => {
       toast("Something went wrong! Please try again!!", {
         type: "error",
       });
+      setError(err?.response?.data?.message ?? "Unexpected error");
     }
   };
 
@@ -53,6 +56,7 @@ const Login = () => {
             id="password"
             content="Password"
           />
+          {error && <p className="text-red-500">{error}</p>}
           <Button content="Login" type="submit" className="bg-blue-600" />
         </form>
       </div>
