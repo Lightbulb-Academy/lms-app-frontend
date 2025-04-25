@@ -4,6 +4,7 @@ import Input from "../components/input";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,8 +26,14 @@ const Login = () => {
       localStorage.setItem("token", response.data.token);
       navigate("/");
       console.log(response);
+      toast("Welcome!!", {
+        type: "success",
+      });
     } catch (err) {
       console.log(err);
+      toast("Something went wrong! Please try again!!", {
+        type: "error",
+      });
     }
   };
 
