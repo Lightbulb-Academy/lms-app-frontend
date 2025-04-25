@@ -1,9 +1,9 @@
 import { FormEvent, useState } from "react";
 import Button from "../components/button";
 import Input from "../components/input";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
       toast("Welcome!!", {
         type: "success",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
       toast("Something went wrong! Please try again!!", {
         type: "error",
@@ -57,6 +57,15 @@ const Login = () => {
           {error && <p className="text-red-500">{error}</p>}
           <Button content="Login" type="submit" className="bg-blue-600" />
         </form>
+        <p className="text-center mt-4">
+          Don't have an account?{" "}
+          <NavLink
+            className="text-blue-400 ml-1 hover:underline"
+            to="/register"
+          >
+            Register
+          </NavLink>
+        </p>
       </div>
     </div>
   );
