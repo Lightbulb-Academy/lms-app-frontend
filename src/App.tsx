@@ -28,6 +28,10 @@ function App() {
       <Route path="/" element={<ProtectedRoutes />}>
         {/* These routes is rendered by Outlet in AppLayout */}
         <Route path="/books" element={<Books />} />
+        <Route
+          path="/add-book"
+          element={<p>Add book form to be rendered here</p>}
+        />
         <Route path="/members" element={<p>Members</p>} />
         <Route path="/transactions" element={<p>Transactions</p>} />
       </Route>

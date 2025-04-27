@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../utils/axiosInterceptor";
+import Button from "../components/button";
+import { useNavigate } from "react-router";
 
 interface Book {
   id: number;
@@ -10,6 +12,7 @@ interface Book {
 
 export default function Books() {
   const [data, setData] = useState<Book[]>([]);
+  const navigate = useNavigate();
 
   const fetchBooks = async () => {
     try {
@@ -27,7 +30,15 @@ export default function Books() {
 
   return (
     <div className="h-full w-full flex flex-col p-8">
-      <h1 className="text-lg font-bold">Books</h1>
+      <div className="flex justify-between w-full mb-4">
+        <h1 className="text-lg font-bold">Books</h1>
+        <Button
+          type="button"
+          content="+ Add Book"
+          className="bg-black text-white px-2 text-xs cursor-pointer"
+          onClick={() => navigate("/add-book")}
+        />
+      </div>
       <table className="w-full">
         <thead>
           <tr>
