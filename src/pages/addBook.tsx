@@ -74,7 +74,7 @@ const AddBook = () => {
     const { name, value, checked } = e.target;
 
     setBookData((prevData) => ({
-      ...(prevData ?? {}),
+      ...prevData,
       [name]: name === "availability" ? checked : value,
     }));
     console.log(bookData);
