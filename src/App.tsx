@@ -4,6 +4,7 @@ import AppLayout from "./layout/appLayout";
 import Login from "./pages/login";
 import { jwtDecode } from "jwt-decode";
 import Books from "./pages/books";
+import AddBook from "./pages/addBook";
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
@@ -27,14 +28,16 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<ProtectedRoutes />}>
         {/* These routes is rendered by Outlet in AppLayout */}
+        <Route path="/" element={<Navigate to="/books" />} />
         <Route path="/books" element={<Books />} />
-        <Route
-          path="/add-book"
-          element={<p>Add book form to be rendered here</p>}
-        />
+        <Route path="/add-book" element={<AddBook />} />
         <Route path="/members" element={<p>Members</p>} />
         <Route path="/transactions" element={<p>Transactions</p>} />
       </Route>
+      <Route
+        path="*"
+        element={<p className="text-center">ERROR 404: Page not found!!</p>}
+      />
     </Routes>
   );
 }
