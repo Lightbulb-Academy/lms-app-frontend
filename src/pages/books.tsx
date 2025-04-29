@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import Button from "../components/button";
 import { useNavigate } from "react-router";
+import { PencilIcon, Trash2Icon } from "lucide-react";
 
-interface Book {
+export interface Book {
   id: number;
   title: string;
   author: string;
@@ -47,6 +48,7 @@ export default function Books() {
             <th>Author</th>
             <th>Quantity</th>
             <th>Is Available?</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +58,19 @@ export default function Books() {
               <td>{book?.author}</td>
               <td>{book?.available_copies}</td>
               <td>{book?.availability ? "Yes" : "No"}</td>
+              <td>
+                <div className="flex gap-4 items-center justify-center">
+                  <PencilIcon
+                    className="text-blue-400 cursor-pointer"
+                    size={16}
+                    onClick={() => navigate(`/edit-book/${book.id}`)}
+                  />
+                  <Trash2Icon
+                    className="text-red-400 cursor-pointer"
+                    size={16}
+                  />
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

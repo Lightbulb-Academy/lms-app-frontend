@@ -31,6 +31,7 @@ function App() {
         <Route path="/" element={<Navigate to="/books" />} />
         <Route path="/books" element={<Books />} />
         <Route path="/add-book" element={<AddBook />} />
+        <Route path="/edit-book/:id" element={<AddBook />} />
         <Route path="/members" element={<p>Members</p>} />
         <Route path="/transactions" element={<p>Transactions</p>} />
       </Route>

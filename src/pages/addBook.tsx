@@ -1,14 +1,19 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Button from "../components/button";
 import Input from "../components/input";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { ArrowLeftIcon } from "lucide-react";
+import { Book } from "./books";
 
 const AddBook = () => {
   const navigate = useNavigate();
+  const [bookData, setBookData] = useState<Book>();
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { id } = useParams();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -51,6 +56,20 @@ const AddBook = () => {
     }
   };
 
+  const fetchBookFromId = async () => {
+    try {
+      const response = await axiosInstance(`/books/${id}`);
+      console.log(response);
+      setBookData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBookFromId();
+  }, [id]);
+
   return (
     <div className="w-full p-8">
       <div className="flex items-center mb-2 gap-2">
@@ -67,6 +86,7 @@ const AddBook = () => {
           id="title"
           label="Title"
           required={true}
+          value={bookData?.title}
         />
         <Input
           name="author"
@@ -74,8 +94,15 @@ const AddBook = () => {
           id="author"
           label="Author"
           required={true}
+          value={bookData?.author}
         />
-        <Input name="quantity" type="number" id="quantity" label="Quantity" />
+        <Input
+          name="quantity"
+          type="number"
+          id="quantity"
+          label="Quantity"
+          value={bookData?.available_copies}
+        />
         <div className="flex items-center ">
           <label
             htmlFor="availability"
