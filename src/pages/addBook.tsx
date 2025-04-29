@@ -3,7 +3,7 @@ import Button from "../components/button";
 import Input from "../components/input";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ArrowLeftIcon } from "lucide-react";
 import { Book } from "./books";
 
@@ -19,13 +19,14 @@ const AddBook = () => {
     const formData = new FormData(e.currentTarget);
     const formValues = JSON.stringify(Object.fromEntries(formData.entries()));
     const parsedFormValues = JSON.parse(formValues);
+    const url = id ? `/books/${id}` : "/books";
 
     try {
-      await axiosInstance(`/books`, {
-        method: "POST",
+      await axiosInstance(url, {
+        method: id ? "PATCH" : "POST",
         data: {
           ...parsedFormValues,
-          quantity: parseInt(parsedFormValues?.quantity, 10),
+          available_copies: parseInt(parsedFormValues?.available_copies, 10),
           availability: parsedFormValues?.availability === "on",
         },
       });
@@ -59,8 +60,7 @@ const AddBook = () => {
   const fetchBookFromId = async () => {
     try {
       const response = await axiosInstance(`/books/${id}`);
-      console.log(response);
-      setBookData(response.data);
+      setBookData({ ...response.data, availability: true });
     } catch (error) {
       console.log(error);
     }
@@ -70,6 +70,16 @@ const AddBook = () => {
     fetchBookFromId();
   }, [id]);
 
+  const handleBookDataChange = (e: any) => {
+    const { name, value, checked } = e.target;
+
+    setBookData((prevData) => ({
+      ...(prevData ?? {}),
+      [name]: name === "availability" ? checked : value,
+    }));
+    console.log(bookData);
+  };
+
   return (
     <div className="w-full p-8">
       <div className="flex items-center mb-2 gap-2">
@@ -77,6 +87,7 @@ const AddBook = () => {
           onClick={() => navigate("/books")}
           className="cursor-pointer"
         />
+        {/* TODO: update title for edit mode */}
         <h1 className="text-2xl font-bold text-center">Add Books</h1>
       </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
@@ -85,23 +96,24 @@ const AddBook = () => {
           type="text"
           id="title"
           label="Title"
-          required={true}
           value={bookData?.title}
+          onChange={handleBookDataChange}
         />
         <Input
           name="author"
           type="text"
           id="author"
           label="Author"
-          required={true}
           value={bookData?.author}
+          onChange={handleBookDataChange}
         />
         <Input
-          name="quantity"
+          name="available_copies"
           type="number"
           id="quantity"
           label="Quantity"
           value={bookData?.available_copies}
+          onChange={handleBookDataChange}
         />
         <div className="flex items-center ">
           <label
@@ -115,12 +127,14 @@ const AddBook = () => {
             id="availability"
             name="availability"
             className="mx-3 size-5"
+            onChange={handleBookDataChange}
+            checked={bookData?.availability}
           />
         </div>
         {errorMessage && (
           <p className="text-red-500 text-lg text-center">{errorMessage}</p>
         )}
-        <Button label="Add Book" type="submit" />
+        <Button label={id ? "Edit Book" : "Add Book"} type="submit" />
       </form>
     </div>
   );

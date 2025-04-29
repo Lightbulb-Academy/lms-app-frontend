@@ -5,11 +5,11 @@ import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 
 export interface Book {
-  id: number;
-  title: string;
-  author: string;
-  available_copies: number;
-  availability: boolean;
+  id?: number;
+  title?: string;
+  author?: string;
+  available_copies?: number;
+  availability?: boolean;
 }
 
 export default function Books() {
