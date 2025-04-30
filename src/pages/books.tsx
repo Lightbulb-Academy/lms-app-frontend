@@ -3,10 +3,10 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import Button from "../components/button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
-import Modal from "../components/modal";
 import CustomModal from "../components/customModal";
+import { toast } from "react-toastify";
 
-export interface Book {
+export interface FormBook {
   id?: number;
   title?: string;
   author?: string;
@@ -14,8 +14,19 @@ export interface Book {
   availability?: boolean;
 }
 
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  available_copies: number;
+  availability: boolean;
+}
+
 export default function Books() {
   const [data, setData] = useState<Book[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+
   const navigate = useNavigate();
 
   const fetchBooks = async () => {
@@ -25,6 +36,22 @@ export default function Books() {
       setData(response.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosInstance.delete(`/books/${selectedBookId}`);
+      const newData = [...data].filter((book) => book.id !== selectedBookId);
+      setData(newData);
+      setIsModalOpen(false);
+      toast.success("Book deleted successfully!");
+    } catch (err: any) {
+      console.log(err);
+      setIsModalOpen(false);
+      toast.error(
+        err?.response?.data?.message ?? "Error while deleting the book"
+      );
     }
   };
 
@@ -54,12 +81,12 @@ export default function Books() {
           </tr>
         </thead>
         <tbody>
-          {data.map((book) => (
+          {data?.map((book) => (
             <tr key={book.id}>
-              <td>{book?.title}</td>
-              <td>{book?.author}</td>
-              <td>{book?.available_copies}</td>
-              <td>{book?.availability ? "Yes" : "No"}</td>
+              <td>{book.title}</td>
+              <td>{book.author}</td>
+              <td>{book.available_copies}</td>
+              <td>{book.availability ? "Yes" : "No"}</td>
               <td>
                 <div className="flex gap-4 items-center justify-center">
                   <PencilIcon
@@ -70,6 +97,10 @@ export default function Books() {
                   <Trash2Icon
                     className="text-red-400 cursor-pointer"
                     size={16}
+                    onClick={() => {
+                      setSelectedBookId(book.id);
+                      setIsModalOpen(true);
+                    }}
                   />
                 </div>
               </td>
@@ -77,8 +108,12 @@ export default function Books() {
           ))}
         </tbody>
       </table>
-      {/* <Modal /> */}
-      <CustomModal />
+      {isModalOpen && (
+        <CustomModal
+          setIsModalOpen={setIsModalOpen}
+          handleDelete={handleDelete}
+        />
+      )}
     </div>
   );
 }
