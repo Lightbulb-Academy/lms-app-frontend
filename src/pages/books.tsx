@@ -3,6 +3,8 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import Button from "../components/button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
+import Modal from "../components/modal";
+import CustomModal from "../components/customModal";
 
 export interface Book {
   id?: number;
@@ -75,6 +77,8 @@ export default function Books() {
           ))}
         </tbody>
       </table>
+      {/* <Modal /> */}
+      <CustomModal />
     </div>
   );
 }
