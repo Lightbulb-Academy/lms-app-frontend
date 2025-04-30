@@ -5,11 +5,11 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { ArrowLeftIcon } from "lucide-react";
-import { Book } from "./books";
+import { FormBook } from "./books";
 
 const AddBook = () => {
   const navigate = useNavigate();
-  const [bookData, setBookData] = useState<Book>();
+  const [bookData, setBookData] = useState<FormBook>();
   const [errorMessage, setErrorMessage] = useState("");
 
   const { id } = useParams();
