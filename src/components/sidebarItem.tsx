@@ -1,24 +1,27 @@
+import { JSX } from "react";
 import { NavLink } from "react-router";
 
 interface SidebarItemProps {
   to: string;
   label: string;
+  icon: JSX.Element;
 }
 
-export default function SidebarItem({ to, label }: SidebarItemProps) {
+export default function SidebarItem({ to, label, icon }: SidebarItemProps) {
   return (
     <li className="w-full px-4">
       <NavLink
         to={to}
         className={({ isActive }) =>
-          `w-full flex px-4 py-2 rounded-md ${
+          ` items-center gap-2 w-full flex px-4 py-2 rounded-md text-white hover:text-black ${
             isActive
-              ? "bg-black text-white hover:opacity-80"
-              : "hover:bg-amber-100"
+              ? "bg-white !text-primary hover:opacity-80"
+              : "hover:bg-gray-100"
           }`
         }
       >
-        <p className="text-lg">{label}</p>
+        {icon}
+        <p className="text-xl">{label}</p>
       </NavLink>
     </li>
   );

@@ -4,7 +4,7 @@ import Input from "../components/input";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
-import { ArrowLeftIcon } from "lucide-react";
+import { LucideArrowLeft } from "lucide-react";
 import { FormBook } from "./books";
 
 const AddBook = () => {
@@ -83,16 +83,16 @@ const AddBook = () => {
   return (
     <div className="flex flex-col w-full p-8 items-center">
       <div className="w-full flex items-center justify-start mb-2 gap-2">
-        <ArrowLeftIcon
+        <LucideArrowLeft
           onClick={() => navigate("/books")}
-          className="cursor-pointer text-gray-400"
+          className="cursor-pointer text-gray-500"
         />
-        <h1 className="text-sm text-gray-400 text-center">Back to Books</h1>
+        <h1 className="text-sm text-gray-500 text-center">Back to Books</h1>
       </div>
-      <div className="flex flex-col w-[600px] shadow-lg p-8 gap-8 mt-8 pb-16 bg-white">
+      <div className="flex flex-col w-[600px] shadow-lg p-8 gap-8 mt-8 pb-16 bg-white rounded-md">
         <div className="flex flex-col">
-          <h1 className="text-xl font-bold text-black">Add New Book</h1>
-          <p className="text-sm text-gray-400">
+          <h1 className="text-2xl font-bold text-black">Add New Book</h1>
+          <p className="text-gray-400">
             Enter the details of the book you want to add to your collection.
           </p>
         </div>

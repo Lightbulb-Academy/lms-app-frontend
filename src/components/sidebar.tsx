@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import Button from "./button";
 import SidebarItem from "./sidebarItem";
-import { LogOut } from "lucide-react";
+import { BookTextIcon, ListPlusIcon, LogOut, User2Icon } from "lucide-react";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -15,10 +15,14 @@ export default function Sidebar() {
 
       {/* Menu Items */}
       <div className="flex flex-col w-full justify-between h-[90%]">
-        <ul className="flex flex-col gap-1 w-full">
-          <SidebarItem to="/books" label="Books" />
-          <SidebarItem to="/members" label="Members" />
-          <SidebarItem to="/transactions" label="Transactions" />
+        <ul className="flex flex-col gap-4 w-full">
+          <SidebarItem icon={<BookTextIcon />} to="/books" label="Books" />
+          <SidebarItem icon={<User2Icon />} to="/members" label="Members" />
+          <SidebarItem
+            icon={<ListPlusIcon />}
+            to="/transactions"
+            label="Transactions"
+          />
         </ul>
         <Button
           type="button"
