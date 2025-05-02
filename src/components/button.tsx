@@ -20,7 +20,7 @@ const Button = ({
       <button
         onClick={onClick}
         type={type}
-        className={` w-full cursor-pointer  text-white py-2 flex items-center justify-center gap-3 bg-black ${
+        className={`w-full h-12 cursor-pointer text-lg text-white py-2 flex items-center justify-center gap-3 bg-primary ${
           noRounded ? "rounded-none" : "rounded-md"
         } font-semibold hover:opacity-85 active:scale-95 transition-transform duration-150 ${className}`}
       >

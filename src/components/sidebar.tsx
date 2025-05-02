@@ -7,7 +7,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   return (
-    <aside className="w-[20%] h-full bg-amber-200">
+    <aside className="w-[20%] h-full bg-primary text-white">
       {/* Title and Logo */}
       <div className="h-[10%] flex items-center justify-center">
         <h1 className="text-lg font-bold">LMS APP</h1>
@@ -23,7 +23,7 @@ export default function Sidebar() {
         <Button
           type="button"
           label="Logout"
-          className="bg-black rounded-none py-4 cursor-pointer"
+          className="bg-white !text-black rounded-none py-4 cursor-pointer"
           onClick={() => {
             localStorage.removeItem("token");
             navigate("/login");

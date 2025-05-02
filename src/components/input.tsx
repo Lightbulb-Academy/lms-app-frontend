@@ -29,8 +29,8 @@ const Input = ({
   const inputType = isPassword && showPassword ? "text" : type;
 
   return (
-    <div>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+    <div className="flex flex-col gap-1">
+      <label htmlFor={name} className="block text-lg font-bold text-gray-700">
         {label}
       </label>
       <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -43,6 +43,7 @@ const Input = ({
           className={`border-none outline-0 ${
             isPassword ? "w-[90%]" : "w-full"
           }`}
+          placeholder={`Enter ${label}`}
           {...rest}
         />
         {isPassword && (

@@ -65,12 +65,12 @@ export default function Books() {
         <h1 className="text-lg font-bold">Books</h1>
         <Button
           type="button"
-          label="+ Add Book"
-          className="bg-black text-white px-2 text-xs cursor-pointer"
+          label="+ Add"
+          className="bg-black text-white px-2 text-base cursor-pointer !w-[100px]"
           onClick={() => navigate("/add-book")}
         />
       </div>
-      <table className="w-full">
+      <table className="w-full bg-white">
         <thead>
           <tr>
             <th>Title</th>
