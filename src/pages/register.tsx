@@ -45,7 +45,6 @@ const Register = () => {
           />
           <Button label="Register" type="submit" className="bg-blue-600" />
         </form>
-        {/* TODO: Add link to login page similar to Login page */}
       </div>
     </div>
   );

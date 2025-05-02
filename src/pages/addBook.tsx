@@ -87,7 +87,6 @@ const AddBook = () => {
           onClick={() => navigate("/books")}
           className="cursor-pointer text-gray-400"
         />
-        {/* TODO: update title for edit mode */}
         <h1 className="text-sm text-gray-400 text-center">Back to Books</h1>
       </div>
       <div className="flex flex-col w-[600px] shadow-lg p-8 gap-8 mt-8 pb-16 bg-white">
