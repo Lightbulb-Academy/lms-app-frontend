@@ -9,12 +9,11 @@ import {
   SunIcon,
   User2Icon,
 } from "lucide-react";
-import { useContext } from "react";
-import { ThemeContext } from "../context/themeContext";
+import { useTheme } from "../context/themeContext";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const { theme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <aside className="w-[20%] h-full bg-primary text-white">
@@ -22,17 +21,12 @@ export default function Sidebar() {
       <div className="h-[10%] flex items-center justify-between px-8">
         <h1 className="text-lg font-bold">LMS APP</h1>
         {theme === "light" ? (
-          <MoonStarIcon
-            onClick={() => {
-              console.log("theme: dark");
-            }}
-          />
+          <MoonStarIcon onClick={toggleTheme} className="cursor-pointer" />
         ) : (
           <SunIcon
-            onClick={() => {
-              console.log("theme: light");
-            }}
-            className=""
+            onClick={toggleTheme}
+            color="yellow"
+            className="cursor-pointer"
           />
         )}
       </div>

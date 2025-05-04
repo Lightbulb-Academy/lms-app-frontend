@@ -1,10 +1,9 @@
 import { Outlet } from "react-router";
 import Sidebar from "../components/sidebar";
-import { useContext } from "react";
-import { ThemeContext } from "../context/themeContext";
+import { useTheme } from "../context/themeContext";
 
 export default function AppLayout() {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useTheme();
   console.log({ theme });
 
   return (
