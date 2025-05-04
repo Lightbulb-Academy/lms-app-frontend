@@ -1,16 +1,40 @@
 import { useNavigate } from "react-router";
 import Button from "./button";
 import SidebarItem from "./sidebarItem";
-import { BookTextIcon, ListPlusIcon, LogOut, User2Icon } from "lucide-react";
+import {
+  BookTextIcon,
+  ListPlusIcon,
+  LogOut,
+  MoonStarIcon,
+  SunIcon,
+  User2Icon,
+} from "lucide-react";
+import { useContext } from "react";
+import { ThemeContext } from "../context/themeContext";
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <aside className="w-[20%] h-full bg-primary text-white">
       {/* Title and Logo */}
-      <div className="h-[10%] flex items-center justify-center">
+      <div className="h-[10%] flex items-center justify-between px-8">
         <h1 className="text-lg font-bold">LMS APP</h1>
+        {theme === "light" ? (
+          <MoonStarIcon
+            onClick={() => {
+              console.log("theme: dark");
+            }}
+          />
+        ) : (
+          <SunIcon
+            onClick={() => {
+              console.log("theme: light");
+            }}
+            className=""
+          />
+        )}
       </div>
 
       {/* Menu Items */}
