@@ -29,6 +29,7 @@ export default function Books() {
 
   const navigate = useNavigate();
 
+  // TODO: move this API call and data to bookContext
   const fetchBooks = async () => {
     try {
       const response = await axiosInstance("/books");
