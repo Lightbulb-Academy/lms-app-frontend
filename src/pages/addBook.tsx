@@ -31,29 +31,13 @@ const AddBook = () => {
         },
       });
 
-      toast.success("Book Added Successfully", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success("Book Added Successfully");
       navigate("/books");
     } catch (err: any) {
       setErrorMessage(
         err.response?.data?.message || "Failed, Please try again"
       );
-      toast.error("Failed, Please try again", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error("Failed, Please try again");
     }
   };
 
@@ -77,7 +61,6 @@ const AddBook = () => {
       ...prevData,
       [name]: name === "availability" ? checked : value,
     }));
-    console.log(bookData);
   };
 
   return (

@@ -1,11 +1,7 @@
 import { Outlet } from "react-router";
 import Sidebar from "../components/sidebar";
-import { useTheme } from "../context/themeContext";
 
 export default function AppLayout() {
-  const { theme } = useTheme();
-  console.log({ theme });
-
   return (
     <div className="w-screen h-screen flex">
       {/* Sidebar */}
