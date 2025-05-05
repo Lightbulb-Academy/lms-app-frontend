@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { LucideArrowLeft } from "lucide-react";
 import { FormBook } from "./books";
+import { useBook } from "../context/booksContext";
 
 const AddBook = () => {
   const navigate = useNavigate();
   const [bookData, setBookData] = useState<FormBook>();
   const [errorMessage, setErrorMessage] = useState("");
+  const { updateBook } = useBook();
 
   const { id } = useParams();
 
@@ -32,6 +34,7 @@ const AddBook = () => {
       });
 
       toast.success("Book Added Successfully");
+      updateBook(parsedFormValues);
       navigate("/books");
     } catch (err: any) {
       setErrorMessage(
