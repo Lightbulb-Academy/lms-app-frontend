@@ -7,19 +7,21 @@ import { useNavigate, useParams } from "react-router";
 import { LucideArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
 
-type TRANSACTION_TYPE = "return" | "borrow";
+type TRANSACTION_TYPE = "Return" | "Borrow";
 
 export interface Transaction {
   id?: number;
   book_id?: number;
   member_id?: number;
-  transaction_date?: string;
-  type?: TRANSACTION_TYPE;
+  deadline?: string;
+  transaction_type?: TRANSACTION_TYPE;
 }
 
 const AddTransaction = () => {
   const navigate = useNavigate();
-  const [transactionData, setTransactionData] = useState<Transaction>();
+  const [transactionData, setTransactionData] = useState<Transaction>({
+    deadline: new Date().toLocaleString(),
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const { bookData } = useBook();
 
@@ -45,7 +47,6 @@ const AddTransaction = () => {
       });
 
       toast.success("Transaction Added Successfully");
-      // updateTransaction(parsedFormValues);
       navigate("/transactions");
     } catch (err: any) {
       setErrorMessage(
@@ -127,21 +128,21 @@ const AddTransaction = () => {
             </label>
             <select
               id="type"
-              name="type"
+              name="transaction_type"
               className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
               onChange={handleTransactionDataChange}
             >
-              <option value={"borrow"}>Borrow</option>
-              <option value={"return"}>Return</option>
+              <option value={"Borrow"}>Borrow</option>
+              <option value={"Return"}>Return</option>
             </select>
           </div>
           <Input
-            name="transaction_date"
+            name="deadline"
             type="date"
             id="quantity"
             label="Date"
             required={false}
-            value={transactionData?.transaction_date}
+            value={transactionData?.deadline}
             onChange={handleTransactionDataChange}
           />
           {errorMessage && (

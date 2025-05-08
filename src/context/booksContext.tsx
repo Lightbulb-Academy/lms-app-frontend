@@ -17,14 +17,14 @@ interface Book {
   id: number;
   title: string;
   author: string;
-  available_copies: number;
+  quantity: number;
   availability: boolean;
 }
 
 interface BookContextValues {
   bookData: Book[];
   onDelete: (id: number) => void;
-  updateBook: (book: Book) => void;
+  updateBook: () => void;
 }
 
 const BookContext = createContext<BookContextValues>({
@@ -36,8 +36,8 @@ const BookContext = createContext<BookContextValues>({
 const BooksProvider = ({ children }: { children: React.ReactElement }) => {
   const [bookData, setBookData] = useState<Book[]>([]);
 
-  const updateBook = (updateBook: Book) => {
-    setBookData([...bookData, updateBook]);
+  const updateBook = () => {
+    fetchBooks();
   };
 
   const fetchBooks = async () => {

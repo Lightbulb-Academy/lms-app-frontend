@@ -7,6 +7,13 @@ import { useNavigate, useParams } from "react-router";
 import { LucideArrowLeft } from "lucide-react";
 import { FormBook } from "./books";
 import { useBook } from "../context/booksContext";
+import { number, object, string } from "yup";
+
+const bookSchema = object({
+  title: string().required(),
+  author: string().required(),
+  quantity: number().required().min(1),
+});
 
 const AddBook = () => {
   const navigate = useNavigate();
@@ -18,25 +25,21 @@ const AddBook = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const formValues = JSON.stringify(Object.fromEntries(formData.entries()));
-    const parsedFormValues = JSON.parse(formValues);
     const url = id ? `/books/${id}` : "/books";
+    console.log(bookData);
 
     try {
+      const values = await bookSchema.validate(bookData);
       await axiosInstance(url, {
         method: id ? "PATCH" : "POST",
-        data: {
-          ...parsedFormValues,
-          available_copies: parseInt(parsedFormValues?.available_copies, 10),
-          availability: parsedFormValues?.availability === "on",
-        },
+        data: { ...values, availability: values.quantity > 0 },
       });
 
       toast.success("Book Added Successfully");
-      updateBook(parsedFormValues);
+      updateBook();
       navigate("/books");
     } catch (err: any) {
+      console.log(err);
       setErrorMessage(
         err.response?.data?.message || "Failed, Please try again"
       );
@@ -100,29 +103,13 @@ const AddBook = () => {
             onChange={handleBookDataChange}
           />
           <Input
-            name="available_copies"
+            name="quantity"
             type="number"
             id="quantity"
             label="Quantity"
-            value={bookData?.available_copies}
+            value={bookData?.quantity}
             onChange={handleBookDataChange}
           />
-          <div className="flex items-center ">
-            <label
-              htmlFor="availability"
-              className=" text-gray-700 text-lg font-bold "
-            >
-              Availability:
-            </label>
-            <input
-              type="checkbox"
-              id="availability"
-              name="availability"
-              className="mx-3 size-5"
-              onChange={handleBookDataChange}
-              checked={bookData?.availability}
-            />
-          </div>
           {errorMessage && (
             <p className="text-red-500 text-lg text-center">{errorMessage}</p>
           )}

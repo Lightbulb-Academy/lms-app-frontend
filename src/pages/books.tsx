@@ -9,15 +9,14 @@ export interface FormBook {
   id?: number;
   title?: string;
   author?: string;
-  available_copies?: number;
-  availability?: boolean;
+  quantity?: number;
 }
 
 export interface Book {
   id: number;
   title: string;
   author: string;
-  available_copies: number;
+  quantity: number;
   availability: boolean;
 }
 
@@ -25,6 +24,7 @@ export default function Books() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
   const { bookData: data, onDelete } = useBook();
+  console.log(data);
 
   const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ export default function Books() {
             <tr key={book.id}>
               <td>{book.title}</td>
               <td>{book.author}</td>
-              <td>{book.available_copies}</td>
+              <td>{book.quantity}</td>
               <td>{book.availability ? "Yes" : "No"}</td>
               <td>
                 <div className="flex gap-4 items-center justify-center">

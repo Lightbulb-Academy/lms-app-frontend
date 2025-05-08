@@ -36,6 +36,7 @@ function App() {
         <Route path="/add-book" element={<AddBook />} />
         <Route path="/edit-book/:id" element={<AddBook />} />
         <Route path="/members" element={<Members />} />
+        {/* <Route path="/add-member" element={<AddMembers />} /> */}
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/add-transaction" element={<AddTransaction />} />
       </Route>
