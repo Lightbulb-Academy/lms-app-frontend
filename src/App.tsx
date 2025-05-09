@@ -3,7 +3,7 @@ import Register from "./pages/register";
 import AppLayout from "./layout/appLayout";
 import Login from "./pages/login";
 import { jwtDecode } from "jwt-decode";
-import Books from "./pages/books";
+import Books from "./pages/booksWithRedux";
 import AddBook from "./pages/addBook";
 import Members from "./pages/members";
 import Transactions from "./pages/transactions";
